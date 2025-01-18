@@ -1,0 +1,5 @@
+import os
+
+VERTEX_MODEL_NAME: str = os.getenv("GEMINI_MODEL")
+VERTEX_PROJECT_ID = os.getenv("VERTEX_AI_PROJECT_ID")
+VERTEX_LOCATION = os.getenv("LOCATION")
