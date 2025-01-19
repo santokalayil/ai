@@ -1,6 +1,7 @@
 import dotenv
 import logging
 import nest_asyncio
+import vertexai
 
 from . import paths
 
@@ -28,7 +29,10 @@ def initialize() -> None:
     dotenv.load_dotenv(paths.ENV_FILE)
     print("Setting up interactive kernal for async functionality testing..")
     nest_asyncio.apply()
-
+    
+    print("Initiating Vertex AI..")
+    from .constants import VERTEX_PROJECT_ID, VERTEX_LOCATION
+    vertexai.init(project=VERTEX_PROJECT_ID, location=VERTEX_LOCATION)
 
     print("Completed initialization process")
     return

@@ -1,9 +1,8 @@
 from pathlib import Path
-import vertexai
 from vertexai.generative_models import GenerativeModel, Part
 import pymupdf4llm
 
-from ai.constants import VERTEX_PROJECT_ID, VERTEX_LOCATION, VERTEX_MODEL_NAME
+from ai.constants import VERTEX_MODEL_NAME
 
 
 def _extract_pdf_to_markdown_using_gemini_vision(path: Path) -> str:
@@ -13,8 +12,6 @@ def _extract_pdf_to_markdown_using_gemini_vision(path: Path) -> str:
     if input("Do you really want to use Gemini Vision API directory. \nBEWARE that cost is not recorded!")\
         .strip().lower() in ["n", "no"]:
         raise NotImplementedError("Unable to extract pdf")
-    
-    vertexai.init(project=VERTEX_PROJECT_ID, location=VERTEX_LOCATION)
 
 
     prompt = """
