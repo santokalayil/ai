@@ -22,13 +22,15 @@ def initialize() -> None:
     print("Initialization process started!")
     print("Setting up logging level")
     logging.basicConfig(level=logging.DEBUG)
-    print("Loading environment variables from env file")
     
     create_folders()
 
+    print("Loading environment variables from env file")
     dotenv.load_dotenv(paths.ENV_FILE)
-    print("Setting up interactive kernal for async functionality testing..")
-    nest_asyncio.apply()
+
+
+    # print("Setting up interactive kernal for async functionality testing..")
+    # nest_asyncio.apply()
     
     print("Initiating Vertex AI..")
     from .constants import VERTEX_PROJECT_ID, VERTEX_LOCATION

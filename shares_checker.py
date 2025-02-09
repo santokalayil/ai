@@ -12,11 +12,12 @@ from parsers.pdf_extraction import extract_pdf_to_markdown
 __all__ = ["ai"]
 
 async def main():
-    browser = await uc.start()
+    browser = await uc.start(headless=False)
     search_query = "CBA"
     # df = await search_asx_docs(search_query, browser)
-    df: pd.DataFrame = asyncio.run(search_asx_docs(search_query, browser))
-
+    df: pd.DataFrame = await search_asx_docs(search_query, browser)
+    
+    print(df.to_markdown())
     # ideally we should give everything to LLM (until last few days (after deciding))
     headline_col = "HEADLINE / DOC SIZE"
     ann, link = df.loc[0, headline_col]
@@ -35,9 +36,10 @@ async def main():
 
     # GET ALL POSSIBLE COMBINATIONS OF CHECK (like Share Change? all of them keep in pydantic models)
 
-
-    browser.stop()
+    if not browser.stopped:
+        browser.stop()
 
 
 if __name__ == "__main__":
+    # uc.loop().run_until_complete(main())
     asyncio.run(main())
